@@ -1,6 +1,8 @@
 package com.codegym;
 
 
+import com.codegym.service.AppUserService;
+import com.codegym.service.impl.AppUserServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -139,7 +141,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cms");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/comments");
         dataSource.setUsername("root");
         dataSource.setPassword("123456789");
         return dataSource;
@@ -179,5 +181,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(new Locale("vi"));
         return localeResolver;
+    }
+
+    @Bean
+    public AppUserService appUserService() {
+        return new AppUserServiceImpl();
     }
 }
